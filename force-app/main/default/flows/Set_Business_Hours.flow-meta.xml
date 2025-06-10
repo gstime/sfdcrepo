@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <name>Order_Management</name>
+        <label>Order Management</label>
+        <locationX>314</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>is_Agent_Order_Management</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Support Agent</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Owner:Group.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Agent</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Agent_Business_Hour</targetReference>
+            </connector>
+            <label>is Agent Order Management</label>
+        </rules>
+        <rules>
+            <name>is_Manager_Order_Management</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Manager</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Owner:Group.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Manager</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Manager_Business_Hour</targetReference>
+            </connector>
+            <label>is Manager Order Management</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Set Business Hours {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Set Business Hours</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Agent_Business_Hour</name>
+        <label>Get Agent Business Hour</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Entitlement_Record</targetReference>
+        </connector>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Agent Business Hours</stringValue>
+            </value>
+        </filters>
+        <object>BusinessHours</object>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Entitlement_Record</name>
+        <label>Get Entitlement Record</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Update_Agent_Business_Hour</targetReference>
+        </connector>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Agent entitlement processes check</stringValue>
+            </value>
+        </filters>
+        <object>Entitlement</object>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Entitlement_Record_Manager</name>
+        <label>Get Entitlement Record Manager</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Update_Manager_Business_Hour</targetReference>
+        </connector>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Agent entitlement processes check</stringValue>
+            </value>
+        </filters>
+        <object>Entitlement</object>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Manager_Business_Hour</name>
+        <label>Get Manager Business Hour</label>
+        <locationX>314</locationX>
+        <locationY>431</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Entitlement_Record_Manager</targetReference>
+        </connector>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Manager Business Hours</stringValue>
+            </value>
+        </filters>
+        <object>BusinessHours</object>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Agent_Business_Hour</name>
+        <label>Update Agent Business Hour</label>
+        <locationX>50</locationX>
+        <locationY>647</locationY>
+        <inputAssignments>
+            <field>BusinessHoursId</field>
+            <value>
+                <elementReference>Get_Agent_Business_Hour.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>EntitlementId</field>
+            <value>
+                <elementReference>Get_Entitlement_Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Manager_Business_Hour</name>
+        <label>Update Manager Business Hour</label>
+        <locationX>314</locationX>
+        <locationY>647</locationY>
+        <inputAssignments>
+            <field>BusinessHoursId</field>
+            <value>
+                <elementReference>Get_Manager_Business_Hour.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>EntitlementId</field>
+            <value>
+                <elementReference>Get_Entitlement_Record_Manager.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <startElementReference>Order_Management</startElementReference>
+    <status>Active</status>
+</Flow>

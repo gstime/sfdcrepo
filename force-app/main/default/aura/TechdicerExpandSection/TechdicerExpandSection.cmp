@@ -1,0 +1,85 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+     <aura:attribute name="multipleDocument" type="Object"/>
+    <!--section 1 start--> 
+    <div class="slds-section slds-is-close animate" aura:id="lunchSection">
+        <!--section header-->
+        <h3 class="slds-section__title">
+            <button aria-controls="lunchItemList" class="slds-button slds-section__title-action" onclick="{!c.toggleSection}" data-auraId="lunchSection">
+                <lightning:icon iconName="utility:switch"
+                                size="x-small"
+                                class="slds-section__title-action-icon slds-button__icon_left"
+                                alternativeText="button icon"
+                                />
+                <span class="slds-truncate" title="lunch item">lunch item</span>
+            </button>
+        </h3>
+        <!--section body-->
+        <div class="slds-section__content" id="lunchItemList">
+            <p>Grains</p>
+            <p>Pulses</p>
+            <p>Vegetables</p>
+        </div>
+    </div>
+    <!--section 1 end-->
+     
+    <!--section 2 start--> 
+    <div class="slds-section slds-is-close animate" aura:id="DinnerSection">
+        <!--section header-->
+        <h3 class="slds-section__title">
+            <button aria-controls="DinnerId" class="slds-button slds-section__title-action" onclick="{!c.toggleSection}" data-auraId="DinnerSection">
+                <lightning:icon iconName="utility:switch"
+                                alternativeText="button icon"
+                                size="x-small"
+                                class="slds-section__title-action-icon slds-button__icon_left"/>
+                <span class="slds-truncate" title="Dinner Item">Dinner Item</span>
+            </button>
+        </h3>
+        <!--section body-->
+        <div class="slds-section__content" id="DinnerItemId">
+            <p>Pizza</p>
+            <p>Steak</p>
+            <p>Rice</p>
+            <p>Soup</p>
+        </div>
+    </div>
+    <!--section 2 end-->
+     <div class='slds-grid slds-gutters'>
+         <div>
+            <aura:iteration items="{!v.multipleDocument }" var="item">
+            <div class='slds-grid spaceTest'>
+                <div class='slds-col slds-size_1-of-4 slds-wrap'>
+                    <div class="clinhas">Test1</div>
+                </div>
+                <div class='slds-col slds-size_1-of-4 slds-wrap'>
+                    <div class="clinhas">Test1</div>
+                </div>
+                <div class='slds-col slds-size_1-of-4'>
+                    <div class="clinhas">Test1</div>
+                </div>
+                <div class='slds-col slds-size_1-of-4'>
+                    <div class="clinhasStatus">Test1</div>
+                </div>
+                <div class='slds-col slds-size_1-of-4'>
+                    <div class="clinhas">Test1</div>
+                </div>
+                <div class='slds-col slds-size_1-of-4'>
+                    <div class="clinhas">Test1</div>
+                </div>
+                <div class='slds-col slds-size_1-of-4'>
+                    <div class="clinhas">Test1</div>
+                </div>
+                <div class='slds-col slds-size_1-of-4'>
+                    <div class="clinhasStatus">Test1</div>
+                </div>
+            </div>
+            </aura:iteration>
+         </div>
+    </div>
+     <div class='slds-grid slds-gutters'>
+         <div>
+            <aura:iteration items="{!v.multipleDocument }" var="item">
+             </aura:iteration>
+         </div>
+    </div>
+</aura:component>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Allows you to retrieve bookings using search parameters.</description>
+        <name>Action_1</name>
+        <label>Action 1</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <actionName>GetBooking.GetBooking</actionName>
+        <actionType>externalService</actionType>
+    </actionCalls>
+    <description>Allows you to retrieve bookings from developer cargo champ</description>
+    <interviewLabel>GetBookingCargoDevChamp {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>GetBookingCargoDevChamp</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <startElementReference>Action_1</startElementReference>
+    <status>Draft</status>
+</Flow>

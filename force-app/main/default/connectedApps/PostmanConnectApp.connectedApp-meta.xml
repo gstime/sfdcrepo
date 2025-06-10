@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>show.goutam.sfdc@gmail.com</contactEmail>
+    <label>PostmanConnectApp</label>
+    <oauthConfig>
+        <callbackUrl>https://goutam-b5-dev-ed.develop.lightning.force.com</callbackUrl>
+        <consumerKey>3MVG95mg0lk4batg2gCpttzcOR5E__yVeXQWLuwOFUUH9V8sCdv1moUNdGNPRvzumiA89grlgzUUUGwiA.Hqa</consumerKey>
+        <scopes>Full</scopes>
+        <scopes>RefreshToken</scopes>
+    </oauthConfig>
+</ConnectedApp>

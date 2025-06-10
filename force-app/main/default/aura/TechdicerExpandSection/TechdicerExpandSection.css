@@ -1,0 +1,36 @@
+.THIS {
+}
+.THIS .clinhas {
+    width: 100%;
+    background-color: #DCDCDC;
+    text-align: center;
+    padding: 3px;
+    height: 2.25em;
+    line-height: 2.25;
+}
+
+.THIS .clinhasStatus {
+    width: 90px;
+    background-color: #DCDCDC;
+    text-align: center;
+    padding: 3px;
+    height: 2.25em;
+    line-height: 2.25;
+}
+.THIS .spaceTest {
+    margin-top: 5px;
+}
+.THIS .slds-truncate {
+    overflow:  visible !important;
+}
+
+.THIS .row.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.THIS .row.no-gutter [class*='col-']:not(:first-child),
+.THIS .row.no-gutter [class*='col-']:not(:last-child) {
+  padding-right: 0;
+  padding-left: 0;
+}

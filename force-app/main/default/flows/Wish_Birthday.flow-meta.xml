@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Email</name>
+        <label>Send Email</label>
+        <locationX>264</locationX>
+        <locationY>468</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Looping_through_all_the_student</targetReference>
+        </connector>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>Looping_through_all_the_student.Email__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Birthday Wish</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>emailbody</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <description>This flow is use for send birthday wish email</description>
+    <formulas>
+        <name>dayofdob</name>
+        <dataType>String</dataType>
+        <expression>TEXT(DAY(TODAY()))</expression>
+    </formulas>
+    <formulas>
+        <description>Calculate month from the date of birth</description>
+        <name>monthofdob</name>
+        <dataType>String</dataType>
+        <expression>TEXT(MONTH(TODAY()))</expression>
+    </formulas>
+    <interviewLabel>Wish Birthday {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Wish Birthday</label>
+    <loops>
+        <name>Looping_through_all_the_student</name>
+        <label>Looping through all the student</label>
+        <locationX>176</locationX>
+        <locationY>360</locationY>
+        <collectionReference>Get_Student_Record</collectionReference>
+        <iterationOrder>Desc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Send_Email</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Student_Record</name>
+        <label>Get Student Record</label>
+        <locationX>176</locationX>
+        <locationY>252</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Looping_through_all_the_student</targetReference>
+        </connector>
+        <filters>
+            <field>Day_Of_DOB__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>dayofdob</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Month_Of_DOB__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>monthofdob</elementReference>
+            </value>
+        </filters>
+        <object>Student__c</object>
+    </recordLookups>
+    <startElementReference>Get_Student_Record</startElementReference>
+    <status>Draft</status>
+    <textTemplates>
+        <name>emailbody</name>
+        <text>&lt;p&gt;Many many happy return of the day{!Looping_through_all_the_student.First_Name__c}&lt;/p&gt;</text>
+    </textTemplates>
+</Flow>
