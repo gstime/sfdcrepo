@@ -1,3 +1,4 @@
+// add comment to champ availability api
 public class ChampAvailability {
     	@InvocableMethod(label='Cargospot Availability & Price'description='Provides list of available flights and applicable price for a specific origin-destination for supported airlines.')
     	public static List<ChampAvailabilityResponse> makeCallout(List<ChampAvailabilityRequest> req){
